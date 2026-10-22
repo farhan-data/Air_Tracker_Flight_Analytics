@@ -1,0 +1,11 @@
+.venv/
+.env
+__pycache__/
+*.py[cod]
+
+# Local API data files
+api/*.json
+
+# Local and backup files
+/python
+/api/flight_api_backup.py

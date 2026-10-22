@@ -1,0 +1,9 @@
+delay_date,airport_iata,total_flights,canceled_flights,available_median_delay_min,cancellation_percentage
+2026-10-17,DEL,154,6,0.0,3.9
+2026-10-18,AMD,19,0,,0.0
+2026-10-18,BLR,76,0,3.0,0.0
+2026-10-18,BOM,98,1,7.0,1.02
+2026-10-18,CCU,42,0,13.0,0.0
+2026-10-18,DEL,144,3,0.0,2.08
+2026-10-18,HYD,46,0,11.0,0.0
+2026-10-18,LKO,17,0,,0.0
