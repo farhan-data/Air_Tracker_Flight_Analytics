@@ -320,11 +320,12 @@ else:
 # --------------------------------------------------
 # 8. DASHBOARD TABS
 # --------------------------------------------------
-tab1, tab2, tab3, tab4 = st.tabs([
+tab1, tab2, tab3, tab4, tab5 = st.tabs([
     "📋 Flights",
     "🛫 Airport Analysis",
     "⏱️ Delay Analysis",
     "📊 Insights",
+    "🧮 SQL Analysis"
 ])
 
 
@@ -552,6 +553,53 @@ with tab4:
         "Duplicate flight keys may affect record-based counts."
     )
 
+with tab5:
+    st.subheader("SQL Analysis")
+    st.write("Run project SQL queries and view the results.")
+
+    sql_queries = {
+        "Total Flights per Aircraft Model": """
+            SELECT a.model AS aircraft_model,
+                   COUNT(f.flight_id) AS total_flights
+            FROM aircraft a
+            LEFT JOIN flight f
+                ON a.registration = f.aircraft_registration
+            GROUP BY a.model
+            ORDER BY total_flights DESC
+        """,
+        "Top 3 Destination Airports": """
+            SELECT a.iata_code AS airport_iata,
+                   a.name AS airport_name,
+                   COUNT(f.flight_id) AS total_arrivals
+            FROM airport a
+            JOIN flight f
+                ON f.destination_iata = a.iata_code
+            GROUP BY a.iata_code, a.name
+            ORDER BY total_arrivals DESC
+            LIMIT 3
+        """,
+        "Flight Status Counts by Airline": """
+            SELECT airline_code,
+                   LOWER(TRIM(status)) AS flight_status,
+                   COUNT(*) AS total_flights
+            FROM flight
+            GROUP BY airline_code, LOWER(TRIM(status))
+            ORDER BY airline_code, total_flights DESC
+        """
+    }
+
+    selected_query = st.selectbox(
+        "Select SQL Query",
+        list(sql_queries.keys())
+    )
+
+    if st.button("Run SQL Query"):
+        try:
+            result_df = read_query(sql_queries[selected_query])
+            st.dataframe(result_df, width="stretch")
+            st.success(f"Query returned {len(result_df)} rows.")
+        except Exception as e:
+            st.error(f"Query failed: {e}")
 
 # --------------------------------------------------
 # FOOTER
