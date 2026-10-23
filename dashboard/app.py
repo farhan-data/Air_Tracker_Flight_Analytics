@@ -356,7 +356,7 @@ with tab1:
 
     st.dataframe(
         filtered[available_columns],
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -399,7 +399,7 @@ with tab2:
 
     st.dataframe(
         airport_view,
-        use_container_width=True,
+        width="stretch",
         hide_index=True,
     )
 
@@ -431,7 +431,7 @@ with tab3:
     else:
         st.dataframe(
             delays,
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
