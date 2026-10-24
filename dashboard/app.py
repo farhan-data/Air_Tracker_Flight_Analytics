@@ -564,7 +564,7 @@ with tab5:
             FROM aircraft a
             LEFT JOIN flight f
                 ON a.registration = f.aircraft_registration
-            GROUP BY a.model
+            GROUP BY a.modelgit
             ORDER BY total_flights DESC
         """,
         "Top 3 Destination Airports": """
